@@ -1283,6 +1283,21 @@ method returns false. If we fail to perform the copy, then this method will
 throw an error. The message in the error should be informative and tell
 you exactly what went wrong
 
+### `app.setUserAgentFallback(userAgent)`
+
+* `userAgent` String - The user agent string to use as a global fallback
+
+Sets the user agent to use as the fallback user agent when no user agent is
+set at the `webContents` or `session` level.  Useful for ensuring your entire
+app has the same user agent.  Call as early as possible in your apps
+initialization to ensure that your overridden value is used.
+
+### `app.getUserAgentFallback()`
+
+Returns `String` the user agent currently in use as fallback user agent. This
+API returns the default user agent if you have not overriden it using
+`app.setUserAgentFallback`.
+
 ### `app.dock.bounce([type])` _macOS_
 
 * `type` String (optional) - Can be `critical` or `informational`. The default is
