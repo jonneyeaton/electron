@@ -416,9 +416,8 @@ v8::Local<v8::Promise> Session::ResolveProxy(mate::Arguments* args) {
   args->GetNext(&url);
 
   browser_context_->GetResolveProxyHelper()->ResolveProxy(
-      url, base::BindRepeating(
-               util::CopyablePromise::ResolveCopyablePromise<std::string>,
-               util::CopyablePromise(promise)));
+      url, base::BindOnce(util::Promise::ResolvePromise<std::string>,
+                          std::move(promise)));
 
   return handle;
 }
